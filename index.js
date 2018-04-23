@@ -24,6 +24,7 @@ function Mailchimp (api_key) {
 
   this.__api_key = api_key;
   this.__base_url = "https://"+ this.__api_key.split('-')[1] + ".api.mailchimp.com/3.0"
+  this.requestClient = request;
 }
 
 var formatPath = function (path, path_params) {
@@ -483,7 +484,7 @@ Mailchimp.prototype.request = function (options, done) {
       return;
     }
 
-    request({
+    mailchimp.requestClient({
       method : method,
       url : mailchimp.__base_url + path,
       auth : {
