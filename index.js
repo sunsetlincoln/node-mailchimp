@@ -172,6 +172,8 @@ Mailchimp.prototype.delete = function (options, done) {
 
 Mailchimp.prototype._getAndUnpackBatchResults = function (response_body_url, opts) {
 
+  var mailchimp = this;
+  
   return new Promise(function (resolve, reject) {
 
     var parse = new tar.Parse();
@@ -226,7 +228,7 @@ Mailchimp.prototype._getAndUnpackBatchResults = function (response_body_url, opt
     })
 
 
-    request.get({
+    mailchimp.requestClient.get({
       url : response_body_url,
       encoding : null
     }, function (err, response) {
